@@ -1,0 +1,8 @@
+{
+  "oidc_claims": {
+    "repo": "org/myapp",
+    "actor": "user@example.com",
+    "workflow": "deploy-prod"
+  },
+  "runner_fingerprint": "sha256:abc123"
+}

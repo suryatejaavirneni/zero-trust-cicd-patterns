@@ -1,0 +1,27 @@
+# Example of using OIDC identity token with GitHub Actions
+name: OIDC Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS Credentials via OIDC
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: arn:aws:iam::123456789012:role/OIDCDeployRole
+        aws-region: us-east-1
+
+    - name: Deploy with temporary credentials
+      run: |
+        aws s3 ls
